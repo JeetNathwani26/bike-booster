@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>BikeBooster</title>
+    <link rel="website icon" type="png" href="/static/img/b-removebg-preview.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .about-container {
+            width: 90%;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 17%;
+        }
+
+        .about-container h2 {
+            color: #ff9800;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .about-container p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .feature {
+            width: 100%;
+            background: #fff7e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .feature i {
+            font-size: 24px;
+            color: #ff9800;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .feature {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><img src="/static/img/b-removebg-preview.png" class="img"></h1>
+            </div>
+
+            <form class="search-bar" method="POST" action="/searchbar">
+                <input type="text" id="search-box" placeholder="Search bike parts..." autocomplete="off"  name="jk"/>
+                <button>Search</button>
+            </form>
+              
+            <div class="login-sell">
+                {%if id %}
+                   <a href="/logout"><button class="login-btn">Logout</button></a>
+                {%else%}    
+                   <a href="/login"><button class="login-btn">Login</button></a>
+                {%endif%}
+                
+                <a href="/sell"><button class="sell-btn">Post</button></a>
+            </div>
+        </div>
+        <div class="nav">
+            <nav class="category-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/bike">Bike Parts</a></li>
+                    <li><a href="/Accessories">Accessories</a></li>
+                    <li><a href="/sellproduct">Publish</a></li>
+                    <li><a href="#AboutUs">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="ser">
+            <ul id="suggestions"></ul>
+        </div>
+
+
+        <script>
+
+            const searchBox = document.getElementById('search-box');
+            const suggestionsList = document.getElementById('suggestions');
+        
+            searchBox.addEventListener('input', () => {
+              const query = searchBox.value;
+              if (query.length > 0) {
+                fetch(`/search?q=${encodeURIComponent(query)}`)
+                  .then(response => response.json())
+                  .then(data => {
+                    suggestionsList.innerHTML = ''; // Clear previous suggestions
+                    data.forEach(item => {
+                      const li = document.createElement('li');
+                      li.textContent = item;
+                      li.onclick = () => {
+                        searchBox.value = item; // Fill input with clicked suggestion
+                        suggestionsList.innerHTML = ''; // Clear suggestions
+                      };
+                      suggestionsList.appendChild(li);
+                    });
+                  });
+              } else {
+                suggestionsList.innerHTML = ''; // Clear suggestions if query is empty
+              }
+            });
+
+            $(window).on("load", function () {
+                setTimeout(function() { 
+                    $("#preloader").fadeOut("slow", function () {
+                    $(".content").fadeIn("slow");
+                    });
+                }, 1000); // Change 5000 to the duration your GIF takes (in milliseconds)
+            });
+
+                        
+                
+
+          </script>
+
+          
+
+    </header>
+
+    <div id="preloader" style="margin-top: -2%;">
+        <div class="kp">
+            <img src="/static/img/output-onlinegiftools.gif" alt="Loading..." class="loader-image">
+        </div>
+    </div>
+    <div class="about-container">
+        <h2>About Us 🚴‍♂️</h2>
+        <p>Welcome to <strong>Bike Booster</strong> – your ultimate destination for buying and selling bike parts and accessories!</p>
+        <p>We are a passionate community-driven marketplace designed to <strong>connect bike enthusiasts, mechanics, and sellers</strong> in a seamless and secure way.</p>
+        
+        <div class="features">
+            <div class="feature">
+                <i>✅</i>
+                <h3>C2C Marketplace</h3>
+                <p>Buy and sell directly without middlemen.</p>
+            </div>
+            <div class="feature">
+                <i>🚴‍♂️</i>
+                <h3>Wide Selection</h3>
+                <p>Find new and pre-owned bike parts from trusted sellers.</p>
+            </div>
+            <div class="feature">
+                <i>⚡</i>
+                <h3>User-Friendly Platform</h3>
+                <p>List and discover products with ease.</p>
+            </div>
+            <div class="feature">
+                <i>🔒</i>
+                <h3>Secure & Transparent</h3>
+                <p>We ensure a safe buying and selling experience.</p>
+            </div>
+        </div></center>
+
+        <p>🚀 <strong>Join our growing community and fuel your biking passion today!</strong></p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBooster</title>
+    <link rel="website icon" type="png" href="/static/img/b-removebg-preview.png">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body >
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><img src="/static/img/b-removebg-preview.png" class="img"></h1>
+            </div>
+
+            <form class="search-bar" method="POST" action="/searchbar">
+                <input type="text" id="search-box" placeholder="Search bike parts..." autocomplete="off"  name="jk"/>
+                <button>Search</button>
+            </form>
+              
+            <div class="login-sell">
+                {%if id %}
+                   <a href="/logout"><button class="login-btn">Logout</button></a>
+                {%else%}    
+                   <a href="/login"><button class="login-btn">Login</button></a>
+                {%endif%}
+                
+                <a href="/sell"><button class="sell-btn">Post</button></a>
+            </div>
+        </div>
+        <div class="nav">
+            <nav class="category-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/bike">Bike Parts</a></li>
+                    <li><a href="/Accessories">Accessories</a></li>
+                    <li><a href="/sellproduct">Publish</a></li>
+                    <li><a href="/about">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="ser">
+            <ul id="suggestions"></ul>
+        </div>
+
+
+        <script>
+
+            const searchBox = document.getElementById('search-box');
+            const suggestionsList = document.getElementById('suggestions');
+        
+            searchBox.addEventListener('input', () => {
+              const query = searchBox.value;
+              if (query.length > 0) {
+                fetch(`/search?q=${encodeURIComponent(query)}`)
+                  .then(response => response.json())
+                  .then(data => {
+                    suggestionsList.innerHTML = ''; // Clear previous suggestions
+                    data.forEach(item => {
+                      const li = document.createElement('li');
+                      li.textContent = item;
+                      li.onclick = () => {
+                        searchBox.value = item; // Fill input with clicked suggestion
+                        suggestionsList.innerHTML = ''; // Clear suggestions
+                      };
+                      suggestionsList.appendChild(li);
+                    });
+                  });
+              } else {
+                suggestionsList.innerHTML = ''; // Clear suggestions if query is empty
+              }
+            });
+
+            $(window).on("load", function () {
+                setTimeout(function() { 
+                    $("#preloader").fadeOut("slow", function () {
+                    $(".content").fadeIn("slow");
+                    });
+                }, 1000); // Change 5000 to the duration your GIF takes (in milliseconds)
+            });
+
+
+            let slideIndex = 0;
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000); 
+        }
+        window.onload = showSlides;
+                        
+                
+
+          </script>
+
+          
+
+    </header>
+
+
+    <div id="preloader">
+        <div class="kp">
+            <img src="/static/img/output-onlinegiftools.gif" alt="Loading..." class="loader-image">
+        </div>
+    </div>
+  
+
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Buy & Sell Bike Parts & Accessories <br>Easily!</h1>
+            <h2>List Your Product Now on <a href="/sell" style="text-decoration: none; color: black;"><u>Bike Booster!</u></a></h2>    
+            <div class="banner-link">
+                <a href="#gh"><button class="sell-btn">View Product</button></a>
+                <a href="/bike"><button class="sell-btn">Bike Part</button></a>
+                <a href="/Accessories"><button class="sell-btn">Bike Accessories</button></a>
+            </div>
+            <div class="slideshow-container" id="home">
+                <div class="sl" >
+                    <div class="slide">
+                        <img src="/static/img/bike1.png" alt="Slide 1">    
+                    </div>
+                    <div class="slide">
+                        <img src="/static/img/bike2.png" alt="Flower 2">
+                    </div>
+                    <div class="slide">
+                        <img src="/static/img/bike3.png" alt="Flower 3">
+                    </div> 
+                </center>   
+                </div>
+        
+            </div>
+            
+        </div>
+    </section>
+    <div id="gh"></div>
+    <div >
+        <div style="margin-top: 15%;" >
+            <section class="recommendations" >
+                <h3>Fresh Recommendations</h3>
+                    <div class="product-grid" >
+                        {% for a in data %}
+                        <a href="/show/{{a.0}}" target="_blank" class="link">
+                            <div class="product-card">
+                                <div>
+                                    <img src="/static/img/{{a.2}}" alt="Bike Part"><br><br>
+                                </div> 
+                                
+                                <div>
+                                    <h1>{{a.1}}</h1><br>
+                                    <h1>&#8377;{{a.3}}</h1><br>
+                                    <p>Loction: <span>{{a.4}}</span></p>
+                                </div>
+        
+                            </div>
+                        </a>
+                        {%endfor%} 
+                    </div>
+            </section>
+        </div>
+  
+    </div>
+
+
+</body>
+</html>

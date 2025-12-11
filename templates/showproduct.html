@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBooster</title>
+    <link rel="website icon" type="png" href="/static/img/b-removebg-preview.png">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body >
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><img src="/static/img/b-removebg-preview.png" class="img"></h1>
+            </div>
+            
+            <form class="search-bar" method="POST" action="/searchbar">
+                <input type="text" id="search-box" placeholder="Search bike parts..." autocomplete="off"  name="jk"/>
+                <button>Search</button>
+            </form>
+              
+            <div class="login-sell">
+                <a href="/login"><button class="login-btn">Login</button></a>
+                <a href="/sell"><button class="sell-btn">Sell</button></a>
+            </div>
+        </div>
+        <div class="nav">
+            <nav class="category-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/bike">Bike Parts</a></li>
+                    <li><a href="/Accessories">Accessories</a></li>
+                    <li><a href="/sellproduct">Publish</a></li>
+                    <li><a href="/about">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="ser">
+            <ul id="suggestions"></ul>
+        </div>
+        <script>
+            const searchBox = document.getElementById('search-box');
+            const suggestionsList = document.getElementById('suggestions');
+        
+            searchBox.addEventListener('input', () => {
+              const query = searchBox.value;
+              if (query.length > 0) {
+                fetch(`/search?q=${encodeURIComponent(query)}`)
+                  .then(response => response.json())
+                  .then(data => {
+                    suggestionsList.innerHTML = ''; // Clear previous suggestions
+                    data.forEach(item => {
+                      const li = document.createElement('li');
+                      li.textContent = item;
+                      li.onclick = () => {
+                        searchBox.value = item; // Fill input with clicked suggestion
+                        suggestionsList.innerHTML = ''; // Clear suggestions
+                      };
+                      suggestionsList.appendChild(li);
+                    });
+                  });
+              } else {
+                suggestionsList.innerHTML = ''; // Clear suggestions if query is empty
+              }
+            });
+
+            $(window).on("load", function () {
+                setTimeout(function() { 
+                    $("#preloader").fadeOut("slow", function () {
+                    });
+                }, 1000); // Change 5000 to the duration your GIF takes (in milliseconds)
+            });
+          </script>
+
+    </header>
+
+    <div id="preloader" style="margin-top: -3%;">
+        <div class="kp">
+            <img src="/static/img/output-onlinegiftools.gif" alt="Loading..." class="loader-image">
+        </div>
+    </div>
+    {%for i in show%}
+       <div class="product-card2"> 
+            <div class="ij">
+                <img src="/static/img/{{i.2}}" alt="Bike Part" >
+            </div>
+            
+            <div class="gh">
+                <h1>{{i.1}}</h1>
+                <h2>&#8377; {{i.3}}</h2>
+                <!--<div class="g">
+                    <a href="#"><button class="sell-btn">Save</button></a>
+                    <a href="#"><button class="sell-btn">Buy Now</button></a>
+                    <a href="#"><button class="sell-btn">Similer Product</button></a>
+                </div>-->
+            </div>
+            <div class="dis">
+                <h1>Discription</h1>
+                <p>{{i.4}}</p>
+            </div>
+            {%if id %}
+                <div class="seller">
+                    <h1>Sold By</h1>
+                    <h3>{{i.5}}<a href="https://wa.me/{{ph}}?text={{b}}"><button class="sell-btn" style="margin-left: 60%;">Chat</button></a></h3>
+                    
+                </div>
+            {%else%}
+                <div class="seller">
+                    <h1>Sold By</h1>
+                    <h3>{{i.5}}<a href="/login"><button class="sell-btn" style="margin-left: 60%;">Chat</button></a></h3>
+                    
+                </div>   
+            {%endif%}     
+
+    {%endfor%}
+</body>
+</html>

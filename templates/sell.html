@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBooster</title>
+    <link rel="website icon" type="png" href="/static/img/b-removebg-preview.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fde79b;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header and Button Styling */
+        header {
+            padding: 3%;
+            text-align: center;
+            font-size: 24px;
+            margin-left: 3%;
+            font-weight: bold;
+            color: #333;
+        }
+
+        button {
+            background-color: #0052cc;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #FFA800;
+        }
+
+        /* Form Container Styling */
+        #sellForm {
+            background-color:transparent;
+            padding: 2%;
+            margin-left: 30%;
+            width: 40%;
+            height: 70%;
+            overflow-x:hidden;
+            overflow-y: scroll;
+            scrollbar-width:none;
+            border-radius: 10px;
+            position: fixed;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 95%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: white;
+        }
+        
+        .hj
+        {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #0052cc;
+            border: none;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+    img 
+    {
+      width:20%;
+      height: 30%;
+      margin-left: 2%;
+      margin-top: -3%;
+      position: fixed;
+      top:0%;
+      right: 0%;
+      left:0%;
+    }
+    #preloader {
+            position: fixed;
+            width: 100%;
+            height: 200%;
+            background:white;
+            display: flex;
+            justify-content: center;
+           
+            z-index: 1000;
+        }
+
+        
+        /* Loader Image */
+        .loader-image {
+           
+            width: 40%; /* Adjust the size as needed */
+            height: 40%;
+            margin-left: 30%;
+            margin-top: 15%;
+        }
+        
+        /* Hide Content Initially */
+        .content {
+            display: none;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            #sellForm {
+                width: 90%;
+            }
+        }
+        .t1
+        {
+            text-align: right;
+            font-size: 15px;
+            color:blue;
+
+        }
+    </style>
+  <script>
+    // Data for bike type products and accessories
+    const data = {
+        BikePart: ["Engine", "Brakes", "Tires", "Suspension"],
+        Accessories: ["Helmet", "Gloves", "Bike Cover", "Lights"]
+    };
+
+    // Function to display items in the dropdown based on the selected category
+    function showItems() {
+      const category = document.getElementById("kl").value;
+      const itemsList = document.getElementById("kl1");
+
+      // Clear previous items
+      itemsList.innerHTML = '<option value="">-- Select an item --</option>';
+
+      // Check if a valid category is selected
+      if (category && data[category]) {
+        // Add items to the dropdown list
+        data[category].forEach(item => {
+          const option = document.createElement("option");
+          option.value = item.toLowerCase(); // Set value (can be used for further logic)
+          option.textContent = item; // Set visible text
+          itemsList.appendChild(option);
+        });
+      }
+    }
+
+    $(window).on("load", function () {
+                setTimeout(function() { 
+                    $("#preloader").fadeOut("slow", function () {
+                    });
+                }, 1000); // Change 5000 to the duration your GIF takes (in milliseconds)
+            });
+
+  </script>
+
+</head>
+<body>
+    <div id="preloader">
+        <div class="kp">
+            <img src="/static/img/output-onlinegiftools.gif" alt="Loading..." class="loader-image">
+        </div>
+    </div>
+    <!-- Header Section -->
+    <header>
+        Bike Booster - Sell Your Bike Parts
+    </header>
+
+    <div class="img">
+        <img src="/static/img/b-removebg-preview.png">
+      </div>
+    <!-- Hidden form that appears when the "Sell" button is clicked -->
+    <div id="sellForm">
+        <form id="productForm"  method="POST" action="/product" enctype="multipart/form-data">
+            <label for="productImage">Upload Product Image:</label>
+            <input  type="file" id="formFile" name="picture">    
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="name" placeholder="Enter product name" required><br>
+
+            <label for="productPrice">Price:</label>
+            <input type="number" id="productPrice" name="price" placeholder="Enter price" required><br>
+
+        
+
+            <label for="sellerContact">Product Information:</label>
+            <input type="text" id="sellerContact" name="product" placeholder="Enter contact information" required><br>
+
+
+
+            <label for="sellerContact">Product itme:</label>
+            <select name="jk" class="hj" onchange="showItems()" id="kl">
+                <option value="">Please select..</option>
+                <option value="BikePart">Bike Part</option>
+                <option value="Accessories">Accessories</option>
+            </select>
+
+            <label>Available Items:</label>
+            <select id="kl1" class="hj" name="jk1">
+              <option value="">-- Select an item --</option>
+            </select>
+
+            
+            <input type="submit" value="Share">
+        </form>
+    </div>
+
+</body>
+</html>

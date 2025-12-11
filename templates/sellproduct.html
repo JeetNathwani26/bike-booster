@@ -1,0 +1,143 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBooster</title>
+    <link rel="website icon" type="png" href="/static/img/b-removebg-preview.png">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><img src="/static/img/b-removebg-preview.png" class="img"></h1>
+            </div>
+
+            <form class="search-bar" method="POST" action="/searchbar">
+                <input type="text" id="search-box" placeholder="Search bike parts..." autocomplete="off"  name="jk"/>
+                <button>Search</button>
+            </form>
+              
+            <div class="login-sell">
+                {%if id %}
+                   <a href="/logout"><button class="login-btn">Logout</button></a>
+                {%else%}    
+                   <a href="/login"><button class="login-btn">Login</button></a>
+                {%endif%}
+                
+                <a href="/sell"><button class="sell-btn">Post</button></a>
+            </div>
+        </div>
+        <div class="nav">
+            <nav class="category-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/bike">Bike Parts</a></li>
+                    <li><a href="/Accessories">Accessories</a></li>
+                    <li><a href="/sellproduct">Publish</a></li>
+                    <li><a href="#AboutUs">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="ser">
+            <ul id="suggestions"></ul>
+        </div>
+
+
+        <script>
+
+            const searchBox = document.getElementById('search-box');
+            const suggestionsList = document.getElementById('suggestions');
+        
+            searchBox.addEventListener('input', () => {
+              const query = searchBox.value;
+              if (query.length > 0) {
+                fetch(`/search?q=${encodeURIComponent(query)}`)
+                  .then(response => response.json())
+                  .then(data => {
+                    suggestionsList.innerHTML = ''; // Clear previous suggestions
+                    data.forEach(item => {
+                      const li = document.createElement('li');
+                      li.textContent = item;
+                      li.onclick = () => {
+                        searchBox.value = item; // Fill input with clicked suggestion
+                        suggestionsList.innerHTML = ''; // Clear suggestions
+                      };
+                      suggestionsList.appendChild(li);
+                    });
+                  });
+              } else {
+                suggestionsList.innerHTML = ''; // Clear suggestions if query is empty
+              }
+            });
+
+            $(window).on("load", function () {
+                setTimeout(function() { 
+                    $("#preloader").fadeOut("slow", function () {
+                    $(".content").fadeIn("slow");
+                    });
+                }, 1000); // Change 5000 to the duration your GIF takes (in milliseconds)
+            });
+
+
+
+                        
+                
+
+          </script>
+
+          
+
+    </header>
+
+
+    <div id="preloader" style="margin-top: -6%;">
+        <div class="kp">
+            <img src="/static/img/output-onlinegiftools.gif" alt="Loading..." class="loader-image">
+        </div>
+    </div>
+
+
+
+
+    <section class="recommendations1" style="margin-top: 20%;"> 
+       
+            <div class="product-grid">
+                {% for a in data %}
+                    {%if a.10=='invaild'%}
+                            <a href="/show/{{ a.0 }}" target="_blank" class="link">
+                                <div class="product-card" > 
+                                    <p style="color: red;">Expire</p>
+                                    <img src="/static/img/{{ a.2 }}" alt="Bike Part" ><br><br>
+                                    <div>
+                                        <h1>{{ a.1 }}</h1><br>
+                                        <h1>&#8377;{{ a.3 }}</h1><br>
+                                        <p>Location: <span>{{ a.6 }}</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                    {%else%}
+                    <a href="/show/{{ a.0 }}" target="_blank" class="link">
+                        <div class="product-card" > 
+                            <img src="/static/img/{{ a.2 }}" alt="Bike Part"><br><br>
+                            <div>
+                                <h1>{{ a.1 }}</h1><br>
+                                <h1>&#8377;{{ a.3 }}</h1><br>
+                                <p>Location: <span>{{ a.6 }}</span></p>
+                            </div>
+                        </div>
+                    </a>
+
+                    {%endif%}                
+                {% endfor %}  
+            </div>
+    </section>
+    
+
+    <footer id="AboutUs">
+        <p>© 2024 Bike Booster. All rights reserved.</p>
+    </footer>
+</body>
+</html>

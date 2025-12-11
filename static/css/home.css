@@ -1,0 +1,559 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+/* Image */
+.img {
+    height: 105%;
+    width: 20%;
+}
+
+/* Header */
+header {
+    background-color: #fde79b;
+    padding: 0.5%;
+    position: fixed;
+    top:0;
+    right: 0;
+    left: 0;
+}
+
+.header-container {
+    align-items: center;
+    width: 100%;
+   
+}
+
+/* Logo */
+.logo h1 {
+    color: white;
+}
+.search-bar
+{
+    margin-top: -8%;
+}
+.ser
+{
+    background-color: white;
+    height: auto;
+    width: 50%;
+    border-radius: 5px;
+    margin-top: -4.5%;
+    margin-left: 19.5%;
+    position:fixed;
+}
+.ser ul
+{
+    list-style:none;
+}
+.ser ul li
+{
+    padding: 2% 2%;
+    cursor: pointer;
+}
+.ser ul li:hover
+{
+    border-radius: 5px;
+    background:#e9f3ff;
+    border: 1px solid black;
+}
+
+/* Search Bar */
+.search-bar input {
+    padding: 1%;
+    border: none;
+    margin-left:20% ;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 1% 1%;
+    background-color: #f9a825;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.search-bar button:hover {
+    background-color: #ff9d00;
+    color: white;
+}
+
+/* Login & Sell Buttons */
+.login-sell {
+    margin-left: 85%;
+    margin-top: -2.7%;
+}
+
+.login-btn, .sell-btn {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: #ffffff;
+    color: #2b2b2b;
+    
+}
+.login-btn:hover {
+    background-color: #f7f7f7;
+
+}
+.sell-btn {
+    background-color: #f9a825;
+    color: white;
+}
+.sell-btn:hover {
+    background-color: #ff9d00;
+    color: white;
+}
+
+/* Category Navigation */
+.nav 
+{
+    margin-bottom: -1%;
+    margin-right: -1%;
+    margin-left: -1%;
+}
+.category-nav {
+    background-color: #f9a825;
+    padding: 1%;
+    width: 100%;
+    margin-top: 2%;
+}
+
+.category-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.category-nav ul li {
+    margin: 0 20px;
+}
+
+.category-nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.category-nav ul li a:hover {
+
+    color:black;
+}
+
+/* Banner */
+
+.banner {
+    background-color: #f1f7f9;
+    padding: 1%;
+    height: 75%;
+    margin-top: 15%;
+}
+
+.banner img
+{
+
+    margin-top: -25%;
+    height: 80%;
+    width: 40%;
+}
+
+.banner-content h1 {
+    font-size: 400%;
+    margin-left: 45%;
+    margin-bottom: 10px;
+}
+
+.banner-content h2 {
+
+    margin-left: 45%;
+    margin-top: -2%;
+}
+
+.banner-link
+{
+    margin-left: 45%;
+    margin-top:2%;
+}
+/* Recommendations Section */
+.recommendations {
+    margin-top: 1%;
+    text-align: center;
+    margin-left: 2%;
+    width:95%;
+    border: solid 0.2px rgb(234, 234, 242);
+    padding: 1%;
+}
+
+        /* Full-Screen Preloader */
+        #preloader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background:white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            margin-top: -1%;
+        }
+
+        .kp
+        {
+            margin-left: 15%;
+            margin-top: -10%;
+        }
+        
+        /* Loader Image */
+        .loader-image {
+           
+            width: 60%; /* Adjust the size as needed */
+            height: 60%;
+        }
+        
+        /* Hide Content Initially */
+        .content {
+            display: none;
+        }
+
+
+        .slideshow-container { height: 100%; width: 100%;padding-top: 5%;}
+        .sl{margin-top: 1%;margin-bottom: 5%;}
+        .text{font-size: 80px;}
+        .slide img {margin-top: -30%;height: 100%;width: 50%; margin-left: -3%;}
+        .active { display: block; }        
+
+.recommendations1{
+    margin-top: 15%;
+    text-align: center;
+    margin-left: 2%;
+    width:95%;
+    padding: 1%;
+}
+
+.recommendations1 h2
+{
+    margin-bottom: 1%;
+}
+
+
+
+.recommendations h3, .recommendations h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.link
+{
+    text-decoration: none;
+    color: #333;
+}
+
+/* Product Card */
+.product-card, .product-card1 {
+    background-color: white;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.product-card img, .product-card1 img {
+    width: 90%;
+    border-radius: 10px;
+    height: 65%;
+}
+.product-card:hover {
+    box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.3);
+}
+
+.j12
+{
+    width: 90%;
+    border-radius: 10px;
+    margin-top: 5%;
+    padding: 2%;
+    background-color: #E8E8E8; 
+}
+
+.product-card .j12 img
+{
+    filter: grayscale(100%);
+}
+
+.product-card h4, .product-card1 h4 {
+    font-size: 20px;
+    margin: 15px;
+    color: #333;
+}
+
+.product-card p, .product-card1 p {
+    color: #777;
+    font-size: 16px;
+    margin-bottom: 5%;
+}
+
+/* Buttons */
+.buy-btn, .add-btn {
+    color: white;
+    padding: 10px 20px;
+    margin-top: 5%;
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.buy-btn {
+    background-color: #f7af3c;
+}
+
+.add-btn {
+    background-color: #ffcc15f7;
+}
+
+/* Footer */
+footer {
+    background-color: #2b2b2b;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 2%;
+}
+
+.product-card2
+{
+    margin-top: 17.5%;
+}
+.product-card2 .ij
+{
+    height: 60%;
+    width: 40%;
+    margin-left: 3%;
+    border: solid 0.2px rgb(234, 234, 242);
+    text-align: center;
+    padding: 0.5%;
+}
+.product-card2 img
+{
+    height: 100%;
+    width:100%;
+   
+}
+
+
+
+.product-card2 .gh
+{
+    margin-top: -28.5%;
+    margin-left: 45%;
+    width:50%;
+    border: solid 0.2px rgb(234, 234, 242);
+    padding: 1%;
+}
+
+.gh h1,h2,.g,.dis p,.seller h3
+{
+    padding-top: 5%;
+    padding-bottom: 1%;
+}
+
+.dis,.seller
+{
+    margin-top: 2%;
+    margin-left: 45%;
+    width:50%;
+    border: solid 0.2px rgb(234, 234, 242);
+    padding: 1%;
+}
+
+.f2
+{
+    margin-top: 40%;
+}
+
+
+/* chat design*/
+.sidebar {
+    margin-top: 15%;
+    width: 20%;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+}
+
+
+
+.chat-list {
+    margin-top: 20px;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+
+
+.chat-item .details {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-item .details .title {
+    font-weight: bold;
+    color: #333;
+}
+
+.chat-item .details .message-preview {
+    font-size: 12px;
+    color: #888;
+}
+
+.message-view {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    margin-left: 20%;
+    width: 80%;
+}
+
+.message-header {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.message-body {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.message-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.message-options button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #008cba;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.message-options button:hover {
+    background-color: #005f75;
+}
+
+
+/* Media Queries for Responsive Design */
+@media (max-width:500px)
+{
+
+    .img {
+        height: 80%;
+        width: 25%;
+        margin-top: -3%;
+    }
+    
+    /* Header */
+    header {
+        width: 100%;
+        height: 20%;
+    }
+    .search-bar
+    {
+        margin-top: -5%;
+        
+    }
+    .search-bar input{
+        width: 80%;
+        height: 25%;
+        margin-left: 2%;
+        margin-bottom: 2%;
+    }
+    .search-bar button {
+        margin-left: 1%;
+        width: 15%;
+        padding: 2.5%;
+    }
+    .login-sell {
+        
+        margin-top: -25%;
+    }
+    .login-btn{ 
+        margin-left: -120%;
+        width: 100%;
+        height: 30%;
+        padding: 4%;
+    }
+    .sell-btn
+    {
+        margin-left: 10%;
+        width: 100%;
+        height: 30%;
+        padding: 4%;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        font-size: 50%;
+    }
+    .banner {
+        margin-top: 38%;
+    }
+    .nav
+    {
+        margin-top: 15%;
+        font-size: 7px;
+    }
+    .recommendations
+    {
+        width: 100%;
+    }
+    .category-nav
+    {
+        padding: 2%;
+    }
+    
+}
+

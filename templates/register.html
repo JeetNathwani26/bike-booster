@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BikeBooster</title>
+  <link rel="website icon" type="png" href="/static/img/b-removebg-preview.png">
+  <link rel="stylesheet" href="/static/css/login.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+function call() {
+  // Get form field values inside the function
+  const fullName = document.getElementById("fullname").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("number").value.trim();
+  const address = document.getElementById("Address").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirm-password").value;
+
+  let isValid = true; // Declare validation flag
+
+  if (fullName === "") {
+    alert("Full Name is required.");
+    isValid = false;
+  }
+
+  if (phone === "") {
+    alert("Phone number is required.");
+    isValid = false;
+  } else if (!/^\d{10}$/.test(phone)) {
+    alert("Please enter a valid 10-digit phone number.");
+    isValid = false;
+  }
+
+  if (address === "") {
+    alert("Address is required.");
+    isValid = false;
+  }
+
+  if (password === "") {
+    alert("Password is required.");
+    isValid = false;
+  } else if (password.length < 6) {
+    alert("Password must be at least 6 characters long.");
+    isValid = false;
+  }
+
+  if (confirmPassword === "") {
+    alert("Confirm Password is required.");
+    isValid = false;
+  } else if (password !== confirmPassword) {
+    alert("Passwords do not match.");
+    isValid = false;
+  }
+
+  return isValid; // Return validation status
+}
+
+
+$(window).on("load", function () {
+                setTimeout(function() { 
+                    $("#preloader").fadeOut("slow", function () {
+                    $(".content").fadeIn("slow");
+                    });
+                }, 1000); // Change 5000 to the duration your GIF takes (in milliseconds)
+            });
+     
+  </script>
+</head>
+<body>
+  <img src="/static/img/b-removebg-preview.png" class="img">
+
+  <div id="preloader">
+    <div class="kp">
+        <img src="/static/img/output-onlinegiftools.gif" alt="Loading..." class="loader-image">
+    </div>
+</div>
+  <div class="container">
+    <!-- Sign-Up Form -->
+    <div class="form-box1">
+      <span class="df"><center>Sign Up</center></span>
+      <form class="signup-form" action="/sign-up1" method="POST" >
+        <div class="input-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" placeholder="Enter Your Name" name="f1">
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter Your Email" name="f2">
+        </div>
+        <div class="input-group">
+          <label for="phone">Phone Number</label>
+          <input type="number" id="number" placeholder="Enter Your Phone Number" name="f5">
+        </div>
+        <div class="input-group">
+          <label for="phone">Address</label>
+          <textarea id="Address" placeholder="Enter Your Address" name="f6"></textarea>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter Your Password" name="f3">
+        </div>
+        <div class="input-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" placeholder="Re-enter Your Password" name="f4">
+        </div>
+        <button type="submit" class="btn1" onclick="call()">Sign Up</button>
+
+        <p>Already have an account? <a href="/login">Login</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

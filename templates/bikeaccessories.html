@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Booster - Buy and Sell Bike Parts</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><img src="/static/img/b-removebg-preview.png" class="img"></h1>
+            </div>
+            
+            <form class="search-bar" method="POST" action="/searchbar">
+                <input type="text" id="search-box" placeholder="Search bike parts..." autocomplete="off"  name="jk"/>
+                <button>Search</button>
+            </form>
+              
+            <div class="login-sell">
+                <a href="/login"><button class="login-btn">Login</button></a>
+                <a href="/sell"><button class="sell-btn">Sell</button></a>
+            </div>
+        </div>
+        <div class="nav">
+            <nav class="category-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/bike">Bike Parts</a></li>
+                    <li><a href="/Accessories">Accessories</a></li>
+                    <li><a href="/sellproduct">Publish</a></li>
+                    <li><a href="/about">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="ser">
+            <ul id="suggestions"></ul>
+        </div>
+        <script>
+            const searchBox = document.getElementById('search-box');
+            const suggestionsList = document.getElementById('suggestions');
+        
+            searchBox.addEventListener('input', () => {
+              const query = searchBox.value;
+              if (query.length > 0) {
+                fetch(`/search?q=${encodeURIComponent(query)}`)
+                  .then(response => response.json())
+                  .then(data => {
+                    suggestionsList.innerHTML = ''; // Clear previous suggestions
+                    data.forEach(item => {
+                      const li = document.createElement('li');
+                      li.textContent = item;
+                      li.onclick = () => {
+                        searchBox.value = item; // Fill input with clicked suggestion
+                        suggestionsList.innerHTML = ''; // Clear suggestions
+                      };
+                      suggestionsList.appendChild(li);
+                    });
+                  });
+              } else {
+                suggestionsList.innerHTML = ''; // Clear suggestions if query is empty
+              }
+            });
+
+            
+            $(window).on("load", function () {
+                setTimeout(function() { 
+                    $("#preloader").fadeOut("slow", function () {
+                    $(".content").fadeIn("slow");
+                    });
+                }, 2000); // Change 5000 to the duration your GIF takes (in milliseconds)
+            });
+          </script>
+
+    </header>
+
+
+    <div id="preloader">
+        <div class="kp">
+            <img src="/static/img/output-onlinegiftools.gif" alt="Loading..." class="loader-image">
+        </div>
+       
+    </div>
+
+
+
+    <section class="recommendations">
+        <h2>Accessories</h2>
+       
+        <div class="product-grid">
+            {% for a in data1 %} 
+            <div class="product-card">
+                <img src="/static/img/{{a.2}}" alt="Bike Part">
+                <h4>&#8377;{{a.3}}</h4>
+                <p>{{a.4}}</p>
+                <button class="add-btn">Addcart</button>
+                <button class="buy-btn">Buy</button>
+            </div>
+            {%endfor%} 
+        </div>
+       
+    </section>
+
+    <footer>
+        <p>© 2024 Bike Booster. All rights reserved.</p>
+    </footer>
+</body>
+</html>
